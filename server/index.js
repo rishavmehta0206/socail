@@ -20,7 +20,13 @@ app.use(express.json());
 app.use(helmet());
 // app.use(morgan("common"))
 app.use(cookieParser());
-app.use(cors());
+const corsConfig = {
+  origin: '',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+}
+app.use(cors(corsConfig))
+app.options("", cors(corsConfig))
 app.use((req, res, next) => {
   res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin'); // Allows all origins
   next();
