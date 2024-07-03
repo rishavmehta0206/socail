@@ -21,7 +21,7 @@ app.use(helmet());
 // app.use(morgan("common"))
 app.use(cookieParser());
 const corsConfig = {
-  origin: '',
+  origin: '*',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE']
 }

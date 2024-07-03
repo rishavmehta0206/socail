@@ -12,8 +12,8 @@ router.post("/register", async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   user && res.status(404).json("user already exsists please login");
   try {
-    const salt = await bcrypt.genSalt(10);
-    const hassedPassword = await bcrypt.hash(password, salt);
+    // const salt = await bcrypt.genSalt(10);
+    const hassedPassword = bcrypt.hashSync(password, 'salt');
     const newUser = await User.create({
       username,
       email,
@@ -31,7 +31,7 @@ router.post("/login", async (req, res) => {
       return res.status(404).json("user not found");
     }
 
-    const validPassword = await bcrypt.compare(
+    const validPassword =  bcrypt.compareSync(
       req.body.password,
       user.password
     );
